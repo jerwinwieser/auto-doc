@@ -50,12 +50,10 @@ def main():
         print('Composing email for : ' + dirname)
         
         # read in name
-        name = pd.read_csv('email/' + dirname + '/name.txt')
-        name = name.columns.values[0]
+        name = pd.read_csv('email/' + dirname + '/name.txt').columns.values[0]
     
         # read in email
-        email = pd.read_csv('email/' + dirname + '/email.txt')
-        email = email.columns.values[0]
+        email = pd.read_csv('email/' + dirname + '/email.txt').columns.values[0]
 
         # read message
         message_template = read_template('email/' + dirname + '/message.txt')
@@ -69,8 +67,7 @@ def main():
         dirname = 'email/' + dirname
         filenames = os.listdir(dirname)
         
-        filenames = [dirname + '/' + filename for filename in filenames]
-        print(filenames)
+        filenames = [dirname + '/' + filename for filename in filenames if filename.endswith('.pdf') == True]
 
         for filename in filenames:
             print('Attaching file : ' + filename)
