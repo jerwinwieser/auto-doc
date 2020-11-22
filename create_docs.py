@@ -22,6 +22,7 @@ def write_data(i):
         os.makedirs('apply' + '/' + dirname)
         copyfile('templ/letter.tex', 'apply' + '/' + base + 'letter.tex')
         copyfile('templ/body.txt', 'apply' + '/' + base + 'body.txt')
+        copyfile('templ/message.txt', 'apply' + '/' + base + 'message.txt')
 
         obj = df.iloc[i]
         f = open('apply' + '/' + base + 'vars.txt', 'w')
