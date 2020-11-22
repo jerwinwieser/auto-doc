@@ -35,15 +35,6 @@ def attach_document(filename):
 
 ADDRESS, PASS = pd.read_csv('__credentials__/details.txt').values[0]
 
-contacts = pd.read_csv('contacts.csv', names = ['name', 'email'])
-
-print(contacts)
-
-names = contacts['name'].values
-emails = contacts['email'].values
-
-message_template = read_template('message.txt')
- 
 def main():
     # set up the SMTP server
     s = smtplib.SMTP(host='smtp.gmail.com', port=587)
@@ -51,20 +42,31 @@ def main():
     s.login(ADDRESS, PASS)
  
     # attach these files
-    dirnames = os.listdir('__apply__')
+    dirnames = os.listdir('email/')
     i = 0
 
-    # For each contact, send the email:
-    for name, email, dirname in zip(names, emails, dirnames):
-        print('Composing email for : ' + name.title())
-      
+# For each contact, send the email:
+    for dirname in dirnames:
+        print('Composing email for : ' + dirname)
+        
+        # read in name
+        name = pd.read_csv('email/' + dirname + '/name.txt')
+        name = name.columns.values[0]
+    
+        # read in email
+        email = pd.read_csv('email/' + dirname + '/email.txt')
+        email = email.columns.values[0]
+
+        # read message
+        message_template = read_template('email/' + dirname + '/message.txt')
+        
         # create a message
         msg = MIMEMultipart()
 
         # add in the actual person name to the message template
         message = message_template.substitute(PERSON_NAME=name.title())
        
-        dirname = '__apply__/' + dirname
+        dirname = 'email/' + dirname
         filenames = os.listdir(dirname)
         
         filenames = [dirname + '/' + filename for filename in filenames]

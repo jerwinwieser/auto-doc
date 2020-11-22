@@ -51,5 +51,15 @@ def write_data(i):
 
         f.close()
 
+        name = open('apply' + '/' + base + 'name.txt', 'w') 
+        name.write(obj.companynameperson)
+        name.close()
+
+        email = open('apply' + '/' + base + 'email.txt', 'w') 
+        email.write(obj.companyemail)
+        email.close()
+
 for index, row in df.iterrows():
     write_data(i = index)
+
+       
