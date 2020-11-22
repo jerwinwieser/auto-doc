@@ -4,6 +4,7 @@ bak/
 email/
 *.csv
 *.pdf
+*.txt
 __credentials__
 
 # Byte-compiled / optimized / DLL files
