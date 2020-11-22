@@ -4,7 +4,7 @@ bak/
 email/
 *.csv
 *.pdf
-
+__credentials__
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
