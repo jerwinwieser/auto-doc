@@ -3,6 +3,7 @@ import csv
 import json
 import os
 from shutil import copyfile
+import shutil
 
 df = pd.read_csv('applications.csv')
 
@@ -17,12 +18,18 @@ def write_data(i):
 
     base = dirname + '/'
     newline = '\n'
+    
+    if df['createapply'][i] == 1:
+    
+        dir = 'apply' + '/' + dirname
+        if os.path.exists(dir):
+            shutil.rmtree(dir)
+        os.makedirs(dir)
 
-    if not os.path.exists('apply' + '/' + dirname):
-        os.makedirs('apply' + '/' + dirname)
         copyfile('templ/letter.tex', 'apply' + '/' + base + 'letter.tex')
         copyfile('templ/body.txt', 'apply' + '/' + base + 'body.txt')
         copyfile('templ/message.txt', 'apply' + '/' + base + 'message.txt')
+        copyfile('templ/resume.tex', 'apply' + '/' + base + 'resume.tex')
 
         obj = df.iloc[i]
         f = open('apply' + '/' + base + 'vars.txt', 'w')
